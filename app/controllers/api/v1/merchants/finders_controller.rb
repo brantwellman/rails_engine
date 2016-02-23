@@ -1,4 +1,4 @@
-class Api::V1::MerchantFindersController < ApplicationController
+class Api::V1::Merchants::FindersController < ApplicationController
   respond_to :json
 
   def show
