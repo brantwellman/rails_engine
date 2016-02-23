@@ -11,6 +11,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'figaro'
 gem 'pg'
 gem 'responders'
+gem 'pry'
 
 group :development, :test do
   gem 'byebug'
@@ -21,6 +22,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'faker'
 end
 
 group :development do
