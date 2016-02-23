@@ -21,21 +21,21 @@ class Api::V1::CustomerFindersController < ApplicationController
       elsif params[:created_at]
         respond_with Customer.find_by(created_at: params[:created_at])
       elsif params[:updated_at]
-        respond_with Customer.find_by(updated_at: params[:created_at])
+        respond_with Customer.find_by(updated_at: params[:updated_at])
       end
     end
 
     def find_all_params
       if params[:id]
-        respond_with Customer.find(params[:id])
+        respond_with Customer.where(id: params[:id])
       elsif params[:first_name]
         respond_with Customer.where('LOWER(first_name) = ?', params[:first_name].downcase)
       elsif params[:last_name]
         respond_with Customer.where('LOWER(last_name) = ?', params[:last_name].downcase)
       elsif params[:created_at]
-        respond_with Customer.find_by(created_at: params[:created_at])
+        respond_with Customer.where(created_at: params[:created_at])
       elsif params[:updated_at]
-        respond_with Customer.find_by(updated_at: params[:created_at])
+        respond_with Customer.where(updated_at: params[:updated_at])
       end
     end
 end

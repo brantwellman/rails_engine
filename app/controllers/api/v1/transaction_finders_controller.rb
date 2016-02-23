@@ -25,13 +25,13 @@ class Api::V1::TransactionFindersController < ApplicationController
       elsif params[:created_at]
         respond_with Transaction.find_by(created_at: params[:created_at])
       elsif params[:updated_at]
-        respond_with Transaction.find_by(updated_at: params[:created_at])
+        respond_with Transaction.find_by(updated_at: params[:updated_at])
       end
     end
 
     def find_all_params
       if params[:id]
-        respond_with Transaction.find(params[:id])
+        respond_with Transaction.where(id: params[:id])
       elsif params[:result]
         respond_with Transaction.where('LOWER(result) = ?', params[:result].downcase)
       elsif params[:invoice_id]
@@ -41,9 +41,9 @@ class Api::V1::TransactionFindersController < ApplicationController
       elsif params[:credit_card_expiration_date]
         respond_with Transaction.where(credit_card_expiration_date: params[:credit_card_expiration_date])
       elsif params[:created_at]
-        respond_with Transaction.find_by(created_at: params[:created_at])
+        respond_with Transaction.where(created_at: params[:created_at])
       elsif params[:updated_at]
-        respond_with Transaction.find_by(updated_at: params[:created_at])
+        respond_with Transaction.where(updated_at: params[:updated_at])
       end
     end
 end
