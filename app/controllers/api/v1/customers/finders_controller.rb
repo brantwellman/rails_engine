@@ -25,9 +25,8 @@ class Api::V1::Customers::FindersController < ApplicationController
       query = []
       query << "first_name ILIKE '#{customer_name_params[:first_name]}'" if customer_name_params[:first_name]
       query << "last_name ILIKE '#{customer_name_params[:last_name]}'" if customer_name_params[:last_name]
-      # [ :first_name,
-      #   :last_name
-      # ].each do |field|
+      # params = [ :first_name, :last_name ]
+      # params.each do |field|
       #   query << "#{field.to_s} ILIKE '#{customer_name_params[field]}'" if customer_name_params[field]
       # end
       query.join(" AND ")
