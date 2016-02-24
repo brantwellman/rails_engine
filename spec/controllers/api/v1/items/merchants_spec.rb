@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Api::V1::Items::MerchantsController, type: :controller do
 
   describe "GET #show" do
-    it "returns the merchat belonging to the item" do
+    it "returns the merchant belonging to the item" do
       merchant1 = create(:merchant)
       merchant2 = create(:merchant)
       item = create(:item, merchant_id: merchant1.id)
