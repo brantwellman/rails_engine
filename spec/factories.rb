@@ -48,7 +48,6 @@ FactoryGirl.define do
   factory :transaction do
     invoice
     credit_card_number Faker::Lorem.word
-    credit_card_expiration_date Faker::Lorem.word
     result "success"
     created_at "2012-03-27 14:54:09"
     updated_at "2012-03-27 14:54:09"
