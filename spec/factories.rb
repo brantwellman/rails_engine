@@ -5,6 +5,8 @@ FactoryGirl.define do
   factory :customer do
     first_name
     last_name
+    created_at "2012-03-27 14:54:09"
+    updated_at "2012-03-27 14:54:09"
   end
 
   sequence :first_name do |n|
@@ -16,32 +18,47 @@ FactoryGirl.define do
   end
 
   factory :merchant do
-    name Faker::Company.name
+    name
+    created_at "2012-03-27 14:53:59"
+    updated_at "2012-03-27 14:53:59"
+  end
+
+  sequence :name do |n|
+    "#{Faker::Company.name}"
   end
 
   factory :item do
     name Faker::Commerce.product_name
     description Faker::Lorem.sentence
     unit_price Faker::Number.number(5)
-    merchant nil
+    merchant
+    created_at "2012-03-27 14:53:59"
+    updated_at "2012-03-27 14:53:59"
   end
 
   factory :invoice_item do
-    item nil
-    invoice nil
-    quantity 1
-    unit_price 1
+    item
+    invoice
+    quantity Faker::Number.number(5)
+    unit_price Faker::Number.number(5)
+    created_at "2012-03-27 14:54:09"
+    updated_at "2012-03-27 14:54:09"
   end
+
   factory :transaction do
-    invoice nil
-    credit_card_number "MyString"
-    credit_card_expiration_date "MyString"
-    result "MyString"
+    invoice
+    credit_card_number Faker::Lorem.word
+    result "success"
+    created_at "2012-03-27 14:54:09"
+    updated_at "2012-03-27 14:54:09"
   end
+
   factory :invoice do
-    status "MyString"
-    customer nil
-    merchant nil
+    status "shipped"
+    customer
+    merchant
+    created_at "2012-03-25 09:54:09"
+    updated_at "2012-03-25 09:54:09"
   end
 
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::CustomerFindersController, type: :controller do
+RSpec.describe Api::V1::Customers::FindersController, type: :controller do
 
   describe "GET #show" do
     it "returns the one customer with the given attribute" do
@@ -15,14 +15,14 @@ RSpec.describe Api::V1::CustomerFindersController, type: :controller do
       expect("name1").to eq(customer['first_name'])
 
       get :show, first_name: customer2.first_name, format: :json
-      customer =  JSON.parse(response.body)
+      customer2 =  JSON.parse(response.body)
 
-      expect("name2").to eq(customer['first_name'])
+      expect("name2").to eq(customer2['first_name'])
     end
   end
 
   describe "GET #index" do
-    it "returns the one customer with the given attribute" do
+    it "returns all the customers with the given attribute" do
       customer1 = Customer.create(first_name: "name1", last_name: "last1")
       customer2 = Customer.create(first_name: "name1", last_name: "last2")
       customers = [customer1, customer2]
@@ -31,7 +31,7 @@ RSpec.describe Api::V1::CustomerFindersController, type: :controller do
       expect(response.status).to eq(200)
       customer =  JSON.parse(response.body)
 
-      expect("name1").to eq(customer['first_name'])
+      expect("name1").to eq(customer.first['first_name'])
 
       get :index, first_name: "name1", format: :json
       customers = JSON.parse(response.body)

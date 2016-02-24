@@ -2,8 +2,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1, defaults: { format: :json } do
-      get "/customers/random", to: "customers/random#show"
-      get "/customers/find_all", to: "customers/finders#index"
+      namespace :customers do
+        get "/random", to: "random#show"
+        get "/find_all", to: "finders#index"
+        get "/:id/invoices", to: "invoices#index"
+        get "/:id/transactions", to: "transactions#index"
+      end
       get "/customers/find", to: "customers/finders#show"
       resources :customers, only: [:index, :show]
 
@@ -11,29 +15,38 @@ Rails.application.routes.draw do
       get "/invoices/find_all", to: "invoices/finders#index"
       get "/invoices/random", to: "invoices/random#show"
       resources :invoices, only: [:index, :show]
-      get "/invoices/:id/transactions", to: "invoices_transactions#index"
+      get "/invoices/:id/transactions", to: "invoices/transactions#index"
+      get "/invoices/:id/invoice_items", to: "invoices/invoice_items#index"
+      get "/invoices/:id/items", to: "invoices/items#index"
+      get "/invoices/:id/customer", to: "invoices/customers#show"
+      get "/invoices/:id/merchant", to: "invoices/merchants#show"
 
       get "/invoice_items/find", to: "invoice_items/finders#show"
       get "/invoice_items/find_all", to: "invoice_items/finders#index"
       get "/invoice_items/random", to: "invoice_items/random#show"
       resources :invoice_items, only: [:index, :show]
+      get "/invoice_items/:id/invoice", to: "invoice_items/invoices#show"
+      get "/invoice_items/:id/item", to: "invoice_items/items#show"
 
       get "/items/find", to: "items/finders#show"
       get "/items/find_all", to: "items/finders#index"
       get "/items/random", to: "items/random#show"
       resources :items, only: [:index, :show]
+      get "/items/:id/invoice_items", to: "items/invoice_items#index"
+      get "/items/:id/merchant", to: "items/merchants#show"
 
       get "/merchants/find", to: "merchants/finders#show"
       get "/merchants/find_all", to: "merchants/finders#index"
       get "/merchants/random", to: "merchants/random#show"
       resources :merchants, only: [:index, :show]
-      get "merchants/:id/items", to: "merchants_items#index"
-      get "merchants/:id/invoices", to: "merchants_invoices#index"
+      get "merchants/:id/items", to: "merchants/items#index"
+      get "merchants/:id/invoices", to: "merchants/invoices#index"
 
-      get "/transactions/find", to: "transaction_finders#show"
-      get "/transactions/find_all", to: "transaction_finders#index"
-      get "/transactions/random", to: "random_transactions#show"
+      get "/transactions/find", to: "transactions/finders#show"
+      get "/transactions/find_all", to: "transactions/finders#index"
+      get "/transactions/random", to: "transactions/random#show"
       resources :transactions, only: [:index, :show]
+      get "/transactions/:id/invoice", to: "transactions/invoices#show"
     end
   end
 end
