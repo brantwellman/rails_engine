@@ -43,6 +43,7 @@ Rails.application.routes.draw do
       get "merchants/:id/items", to: "merchants/items#index"
       get "merchants/:id/invoices", to: "merchants/invoices#index"
       get "merchants/:id/revenue", to: "merchants/revenue#show"
+      get "merchants/:id/favorite_customer", to: "merchants/favorite_customer#show"
 
       get "/transactions/find", to: "transactions/finders#show"
       get "/transactions/find_all", to: "transactions/finders#index"
