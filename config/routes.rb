@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       get "/invoices/find_all", to: "invoices/finders#index"
       get "/invoices/random", to: "invoices/random#show"
       resources :invoices, only: [:index, :show]
-      get "/invoices/:id/transactions", to: "invoices_transactions#index"
+      get "/invoices/:id/transactions", to: "invoices/transactions#index"
 
       get "/invoice_items/find", to: "invoice_items/finders#show"
       get "/invoice_items/find_all", to: "invoice_items/finders#index"
@@ -27,12 +27,12 @@ Rails.application.routes.draw do
       get "/merchants/find_all", to: "merchants/finders#index"
       get "/merchants/random", to: "merchants/random#show"
       resources :merchants, only: [:index, :show]
-      get "merchants/:id/items", to: "merchants_items#index"
-      get "merchants/:id/invoices", to: "merchants_invoices#index"
+      get "merchants/:id/items", to: "merchants/items#index"
+      get "merchants/:id/invoices", to: "merchants/invoices#index"
 
-      get "/transactions/find", to: "transaction_finders#show"
-      get "/transactions/find_all", to: "transaction_finders#index"
-      get "/transactions/random", to: "random_transactions#show"
+      get "/transactions/find", to: "transactions/finders#show"
+      get "/transactions/find_all", to: "transactions/finders#index"
+      get "/transactions/random", to: "transactions/random#show"
       resources :transactions, only: [:index, :show]
     end
   end

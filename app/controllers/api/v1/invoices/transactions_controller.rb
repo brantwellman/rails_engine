@@ -1,4 +1,4 @@
-class Api::V1::InvoicesTransactionsController < ApplicationController
+class Api::V1::Invoices::TransactionsController < ApplicationController
   respond_to :json
 
   def index
