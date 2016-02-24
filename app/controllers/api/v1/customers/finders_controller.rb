@@ -2,40 +2,42 @@ class Api::V1::Customers::FindersController < ApplicationController
   respond_to :json
 
   def show
-    find_params
+    customers = Customer.where(customer_params)
+    unless customer_name_params.empty?
+      respond_with customers.find_by(build_query)
+    else
+      respond_with customers.first
+    end
   end
 
   def index
-    find_all_params
+    customers = Customer.where(customer_params)
+    unless customer_name_params.empty?
+      respond_with customers.where(build_query)
+    else
+      respond_with customers
+    end
   end
 
   private
 
-    def find_params
-      if params[:id]
-        respond_with Customer.find(params[:id])
-      elsif params[:first_name]
-        respond_with Customer.find_by('LOWER(first_name) = ?', params[:first_name].downcase)
-      elsif params[:last_name]
-        respond_with Customer.find_by('LOWER(last_name) = ?', params[:last_name].downcase)
-      elsif params[:created_at]
-        respond_with Customer.find_by(created_at: params[:created_at])
-      elsif params[:updated_at]
-        respond_with Customer.find_by(updated_at: params[:updated_at])
-      end
+    def build_query
+      query = []
+      query << "first_name ILIKE '#{customer_name_params[:first_name]}'" if customer_name_params[:first_name]
+      query << "last_name ILIKE '#{customer_name_params[:last_name]}'" if customer_name_params[:last_name]
+      # [ :first_name,
+      #   :last_name
+      # ].each do |field|
+      #   query << "#{field.to_s} ILIKE '#{customer_name_params[field]}'" if customer_name_params[field]
+      # end
+      query.join(" AND ")
     end
 
-    def find_all_params
-      if params[:id]
-        respond_with Customer.where(id: params[:id])
-      elsif params[:first_name]
-        respond_with Customer.where('LOWER(first_name) = ?', params[:first_name].downcase)
-      elsif params[:last_name]
-        respond_with Customer.where('LOWER(last_name) = ?', params[:last_name].downcase)
-      elsif params[:created_at]
-        respond_with Customer.where(created_at: params[:created_at])
-      elsif params[:updated_at]
-        respond_with Customer.where(updated_at: params[:updated_at])
-      end
+    def customer_params
+      params.permit(:created_at, :id, :updated_at)
+    end
+
+    def customer_name_params
+      params.permit(:first_name, :last_name)
     end
 end

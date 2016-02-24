@@ -2,6 +2,7 @@ class Api::V1::Items::FindersController < ApplicationController
   respond_to :json
 
   def show
+    # respond_with Item.find_by(item_params)
     find_params
   end
 
@@ -46,4 +47,8 @@ class Api::V1::Items::FindersController < ApplicationController
         respond_with Item.where(updated_at: params[:updated_at])
       end
     end
+
+    # def item_params
+    #   params.require(:item).permit(:name, )
+    # end
 end
