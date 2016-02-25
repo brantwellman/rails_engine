@@ -6,7 +6,7 @@ RSpec.describe Api::V1::InvoiceItems::InvoicesController, type: :controller do
     it "returns the invoice the invoice_item belongs to" do
       invoice1 = create(:invoice)
       invoice2 = create(:invoice)
-      invoice_item = create(:invoice_item, invoice_id: invoice1.id)
+      invoice_item = create(:invoice_item, invoice_id: invoice1.id, quantity: 1, unit_price: 2)
 
       invoices = [invoice1, invoice2]
 

@@ -39,8 +39,8 @@ FactoryGirl.define do
   factory :invoice_item do
     item
     invoice
-    quantity Faker::Number.number(5)
-    unit_price Faker::Number.number(5)
+    quantity 2
+    unit_price 2
     created_at "2012-03-27 14:54:09"
     updated_at "2012-03-27 14:54:09"
   end
