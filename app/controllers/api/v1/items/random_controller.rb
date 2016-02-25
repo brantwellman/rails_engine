@@ -2,8 +2,7 @@ class Api::V1::Items::RandomController < ApplicationController
   respond_to :json
 
   def show
-    num = rand(Item.count)
-    respond_with Item.offset(num).first
+    respond_with Item.new.random
   end
 
 end

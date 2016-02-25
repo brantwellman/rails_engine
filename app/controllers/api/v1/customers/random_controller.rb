@@ -2,8 +2,7 @@ class Api::V1::Customers::RandomController < ApplicationController
   respond_to :json
 
   def show
-    num = rand(Customer.count)
-    respond_with Customer.offset(num).first
+    respond_with Customer.new.random
   end
 
 end
